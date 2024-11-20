@@ -3,14 +3,21 @@ const postsList = require('../data/posts')
 // INDEX
 
 function index(req, res) {
-    res.send('Lista dei post')
+    res.json(postsList)
 }
 
 // SHOW
 
 function show(req, res) {
-    const id = req.params.id
-    res.send(`Ecco il post con id ${id}`)
+    const id = parseInt(req.params.id)
+    const post = postsList.find(post => post.id === id);
+    if(!post){
+        return res.json({
+        error: "Not Found",
+        message: "Post non trovato"
+        })
+        }
+    res.json(post)
 }
 
 // STORE
@@ -29,7 +36,7 @@ function update(req, res) {
 // MODIFY
 
 function modify(req, res) {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
     res.send(`Modificato il post con id ${id}`)
 }
 
@@ -37,6 +44,8 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const id = req.params.id
+    const post = postsList.find(post => post.id === id);
+    postsList.splice(postsList.indexOf(post), 1)
     res.send(`Cancellazione post con id ${id}`)
 }
 
