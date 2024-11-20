@@ -43,10 +43,21 @@ function modify(req, res) {
 // DELETE
 
 function destroy(req, res) {
-    const id = req.params.id
-    const post = postsList.find(post => post.id === id);
-    postsList.splice(postsList.indexOf(post), 1)
-    res.send(`Cancellazione post con id ${id}`)
+    const id = parseInt(req.params.id)
+    const postIndex = postsList.findIndex((post) => post.id === id);
+    
+    if(postIndex === -1) {
+        res.status(404)
+        return res.json({
+            error:  "Post not found",
+            message: "Post non trovato"
+        })
+    }
+
+    postsList.splice(postIndex, 1)
+    res.sendStatus(204)
+    console.log(postsList)
+
 }
 
 module.exports = { index, show, store, update, modify, destroy }
