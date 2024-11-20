@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const postsRouter = require('./routers/posts')
-const postsList = require('./posts')
+// const postsList = require('./posts')
 
 app.use("/posts", postsRouter)
 
