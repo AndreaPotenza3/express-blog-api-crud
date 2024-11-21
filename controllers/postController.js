@@ -24,6 +24,7 @@ function show(req, res) {
 
 function store(req, res) {
     res.send('Creazione del post')
+    console.log(req.body)
 }
 
 // UPDATE

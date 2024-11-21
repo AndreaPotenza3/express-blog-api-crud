@@ -6,6 +6,8 @@ const port = 3000
 const postsRouter = require('./routers/posts')
 // const postsList = require('./posts')
 
+app.use(express.json())
+
 app.use("/posts", postsRouter)
 
 app.use(express.static('public'))
