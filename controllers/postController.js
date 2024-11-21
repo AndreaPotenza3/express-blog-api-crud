@@ -26,14 +26,15 @@ function store(req, res) {
     lastIndex ++
     const newPost = {
         id: lastIndex,
-        name: req.body.name,
+        title: req.body.title,
+        slug: req.body.slug,
+        content: req.body.content,
         image: req.body.image,
-        ingredients: req.body.ingredients
+        tags: req.body.tags
     }
 
     postsList.push(newPost)
     res.send('Creazione del post')
-    console.log(req.body)
     console.log(postsList)
 }
 
@@ -42,10 +43,12 @@ function store(req, res) {
 function update(req, res) {
     const id = parseInt(req.params.id)
     const post = postsList.find(post => post.id === id);
-    const {name, image, ingredients} = req.body
-    post.name = name
+    const {title, slug, image, content, tags} = req.body
+    post.title = title
     post.image = image
-    post.ingredients = ingredients
+    post.content = content
+    post.slug = slug
+    post.tags = tags
     res.send(`Aggiornato il post con id ${id}`)
     res.json(post)
 }
@@ -56,16 +59,22 @@ function update(req, res) {
 
 function modify(req, res) {
     const id = parseInt(req.params.id)
-    const post = postsList.find(post => post.id === id);
-    const {name, image, ingredients} = req.body
-    if(name)
-        post.name = name
+    const post = postsList.find(post => post.id === id)
+    const {title, slug, image, content, tags} = req.body
+    if(title)
+        post.title = title
 
     if(image)
         post.image = image
     
-    if(ingredients)
-        post.ingredients = ingredients
+    if(content)
+        post.content = content
+
+    if(slug)
+        post.slug = slug
+
+    if(tags)
+        post.tags = tags
 
     res.send(`Modificato il post con id ${id}`)
     res.json(post)
@@ -75,7 +84,7 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const id = parseInt(req.params.id)
-    const postIndex = postsList.findIndex((post) => post.id === id);
+    const postIndex = postsList.findIndex((post) => post.id === id)
     
     if(postIndex === -1) {
         res.status(404)
