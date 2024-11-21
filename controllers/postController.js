@@ -40,15 +40,35 @@ function store(req, res) {
 // UPDATE
 
 function update(req, res) {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
+    const post = postsList.find(post => post.id === id);
+    const {name, image, ingredients} = req.body
+    post.name = name
+    post.image = image
+    post.ingredients = ingredients
     res.send(`Aggiornato il post con id ${id}`)
+    res.json(post)
 }
+
+
 
 // MODIFY
 
 function modify(req, res) {
     const id = parseInt(req.params.id)
+    const post = postsList.find(post => post.id === id);
+    const {name, image, ingredients} = req.body
+    if(name)
+        post.name = name
+
+    if(image)
+        post.image = image
+    
+    if(ingredients)
+        post.ingredients = ingredients
+
     res.send(`Modificato il post con id ${id}`)
+    res.json(post)
 }
 
 // DELETE
