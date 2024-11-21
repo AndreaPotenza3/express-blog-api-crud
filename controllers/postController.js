@@ -1,5 +1,5 @@
 const postsList = require('../data/posts')
-
+let lastIndex = postsList.at(-1).id
 // INDEX
 
 function index(req, res) {
@@ -23,8 +23,18 @@ function show(req, res) {
 // STORE
 
 function store(req, res) {
+    lastIndex ++
+    const newPost = {
+        id: lastIndex,
+        name: req.body.name,
+        image: req.body.image,
+        ingredients: req.body.ingredients
+    }
+
+    postsList.push(newPost)
     res.send('Creazione del post')
     console.log(req.body)
+    console.log(postsList)
 }
 
 // UPDATE
