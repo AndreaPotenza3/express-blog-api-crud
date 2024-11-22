@@ -49,7 +49,7 @@ function update(req, res) {
     post.content = content
     post.slug = slug
     post.tags = tags
-    res.send(`Aggiornato il post con id ${id}`)
+    // res.send(`Aggiornato il post con id ${id}`)
     res.json(post)
 }
 
@@ -76,8 +76,9 @@ function modify(req, res) {
     if(tags)
         post.tags = tags
 
-    res.send(`Modificato il post con id ${id}`)
+    // res.send(`Modificato il post con id ${id}`)
     res.json(post)
+    console.log(postsList)
 }
 
 // DELETE
